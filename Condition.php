@@ -47,5 +47,49 @@
              </td>
         </tr>
     </table>
+
+
+
+    <h3>SWITCH CASE</h3>
+
+    <?php
+        $message = '';
+        $role = 'admin';
+
+        switch($role){
+            case 'admin':
+                $message = 'Welcome Admin';
+            break;
+            case 'editor':
+            case 'author':
+                $message = 'Welcome! Do you want to create a new article';
+            break;
+            case 'subscriber':
+                $message = 'Welcome! checkout some new article';
+            break;
+            default:
+                $message = 'You are not authorized to access this page';
+
+        }
+    ?>
+
+
+        <form action="">
+
+            <label for="fname" >Message</label> <br>
+            <input type="text" value = "<?= $message ?>" id = "msg" name = "message"> 
+
+            <input type="submit" value = "Submit" onclick = "ClickEvent()">
+        </form>
+  
+
+
+
+    <script>
+        function ClickEvent(){
+           var ValueGet =  document.getElementById('msg').value;
+           alert("Successfully! "+ValueGet);
+        }
+    </script>
 </body>
 </html>
