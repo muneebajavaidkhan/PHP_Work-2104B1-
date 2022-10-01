@@ -62,7 +62,6 @@
         echo '</ul>';
     }
     ?>
-
      <h3>MULTIDIMENSIONAL ARRAY Ex2</h3>
 
      <?php $Emp = [
@@ -106,6 +105,32 @@
             } ?>
      
      </table>
+    <h3>ASSOCIATIVE ARRAY WITH MULTIDIMENSIONAL</h3>
+    <?php
+    $StudentMarks = [
+        'Student1' => ['PHP' => 70, 'MVC' => 80, 'JS' => 90],
+        'Student2' => ['PHP' => 90, 'MVC' => 85, 'JS' => 98],
+        'Student3' => ['PHP' => 80, 'MVC' => 50, 'JS' => 70],
+    ];
+
+    echo '<pre>';
+    print_r($StudentMarks);
+    echo '</pre>';
+    ?>
+
+    <table border = 1>
+        <?php foreach ($StudentMarks as $key => $Val) {
+            echo '<tr>';
+            echo "<th colspan = 6>$key</th>";
+            echo '</tr>';
+            echo '<tr>';
+            foreach ($Val as $key2 => $V2) {
+                echo "<th>Student[$key2]</th>";
+                echo "<td>  $V2 </td>";
+            }
+            echo '</tr>';
+        } ?>
+    </table>
 
 </body>
 </html>
