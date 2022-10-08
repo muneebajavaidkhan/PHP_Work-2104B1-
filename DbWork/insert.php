@@ -4,6 +4,7 @@
 
 
 <?php if (isset($_POST['ins'])) {
+    
     $Name = $_POST['name'];
     $Gender = $_POST['gen'];
     $City = $_POST['city'];
@@ -19,8 +20,8 @@
     $res = mysqli_query($con, $query);
 
     if ($res) {
-        echo "<a href = 'home.php'>Insert More Records</a>";
-        echo "<script> alert('Data Inserted') </script>";
+       
+        echo "<script> alert('Data Inserted');window.location.href = 'ViewData.php';</script>";
     } else {
         echo "<script> alert('Data Insertion Failed') </script>";
     }
