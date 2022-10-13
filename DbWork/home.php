@@ -3,11 +3,10 @@
 
     
 
-
 <div class="container"> <br>
   <h3>Insert Data In DataBase</h3> <br>
 
-  <form action="insert.php" method = "post">
+  <form action="Crud.php" method = "post">
 
     <div class="form-group">
       <label for="name">StudentName:</label>

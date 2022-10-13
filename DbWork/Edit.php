@@ -6,8 +6,7 @@
 $ID = $_GET['id'];
 $query = "select * from students where StdId = $ID";
 $GetData = mysqli_query($con, $query);
-$res = mysqli_fetch_assoc($GetData);
-print_r($res);
+$res = mysqli_fetch_assoc($GetData); // print_r($res);
 $chckEdit = $res['Courses'];
 $checkBox = explode(',', $chckEdit);
 print_r($checkBox);
@@ -17,7 +16,10 @@ print_r($checkBox);
 <div class="container"> <br>
   <h3>Edit Data In DataBase</h3> <br>
 
-  <form action="insert.php" method = "post">
+  <form action="Crud.php" method = "post">
+
+
+   <input type="hidden"  name="StdID" value = "<?= $res['StdId'] ?>">
 
     <div class="form-group">
       <label for="name">StudentName:</label>
@@ -120,7 +122,7 @@ print_r($checkBox);
 
     
 
-    <button type="submit" class="btn btn-primary" name = "ins">Submit</button>
+    <button type="submit" class="btn btn-primary" name = "upd">Update</button>
   </form>
 </div>
 
