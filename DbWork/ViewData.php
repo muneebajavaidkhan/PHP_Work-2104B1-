@@ -1,13 +1,21 @@
 <?php include 'header.php'; ?>
 <?php include 'connection.php'; ?>
 
+<a href="home.php" class = "btn btn-primary m-5">INSERT MORE RECORDS</a>
+
+
 <?php
 $querys = 'select * from students';
+if (isset($_GET['srch'])) {
+    $search = $_GET['search'];
+    $querys = "select * from students where  StduentName like '%$search%' or Education like '%$search%' 
+    or Fees like  '%$search%' or Gender like '%$search%' or City like '%$search%' or Courses like '%$search%'";
+}
 ($res = mysqli_query($con, $querys)) or die('incorrect Query!!');
 $rowCount = mysqli_num_rows($res);
 ?>
 
-<!-- <form action = "" method = "get">
+<form action = "" method = "get">
                 <div class="input-group col-lg-6 container mb-5 mt-3">
                     <input type="text" class="form-control" placeholder="Search" name = "search">
                     <div class="input-group-append">
@@ -17,11 +25,12 @@ $rowCount = mysqli_num_rows($res);
                         
                 </div>
                 
-            </form> -->
+            </form>
 
-<?php if ($rowCount > 0) { ?>
+<?php
+if ($rowCount > 0) { ?>
 
-<table class = "container table table-bordered ">
+<table class = "container table table-bordered mt-5">
 
     <tr>
         <th>Name</th>
@@ -35,34 +44,34 @@ $rowCount = mysqli_num_rows($res);
     <?php while ($data = mysqli_fetch_assoc($res)) {
         echo '<tr>'; ?>       
                     <td><?= $data['StduentName'] ?></td>
-                    <td><?= $data['Gender'] ?></td>
                     <td><?= $data['Education'] ?> </td>
                     <td><?= $data['Fees'] ?> </td>
+                    <td><?= $data['Gender'] ?></td>
                     <td><?= $data['City'] ?> </td>
                     <td><?= $data['Courses'] ?> </td>
-                    <td><a href="Edit.php?id=<?= $data['StdId'] ?>" class = "btn btn-primary">Edit</a></td>
-                     <td><a href="ViewData.php?Delid=<?= $data['StdId'] ?>" class = "btn btn-danger">Delete</a></td>
+                    <td><a href="Edit.php?id=<?= $data[
+                        'StdId'
+                    ] ?>" class = "btn btn-primary">Edit</a></td>
+                     <td><a href="ViewData.php?Delid=<?= $data[
+                         'StdId'
+                     ] ?>" class = "btn btn-danger"
+                     onclick = "return confirm('Are you sure you want to delete!!');return false;">Delete</a></td>
            
     <?php echo '</tr>';
     } ?>
 
 </table>
 
-<?php } else {echo '<p>No Records Found </p>';} 
-
-    $DelID =  $_GET['Delid'];
-        $query =  "delete from students where StdId = $DelID";
-
-    $res = mysqli_query($con,$query);
-
-
-    if ($res) {
-        echo "<script> alert('Data Deleted')</script>";
-    } else {
-        echo "<script> alert('Data Deletion Failed') </script>";
-    }
-    
-
+<?php } else {echo '<p>No Records Found </p>';}
+error_reporting(0);
+$DelID = $_GET['Delid'];
+$quer = "delete from students where StudId = $DelID";
+$res = mysqli_query($con, $quer);
+echo $res;
+if ($res) {
+    echo "<script>alert('Data Deleted!!');window.location.href = 'ViewData.php';</script>";
+}
+mysqli_close($con);
 ?>
 
 
